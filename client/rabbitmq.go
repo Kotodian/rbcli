@@ -2,8 +2,8 @@ package client
 
 import (
 	"context"
+	"github.com/Kotodian/rbcli/naming"
 	"github.com/streadway/amqp"
-	"rbcli/naming"
 	"sync"
 	"time"
 )

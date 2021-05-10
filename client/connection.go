@@ -2,8 +2,8 @@ package client
 
 import (
 	"crypto/tls"
+	"github.com/Kotodian/rbcli/naming"
 	"github.com/streadway/amqp"
-	"rbcli/naming"
 	"regexp"
 	"strings"
 	"sync"

@@ -2,8 +2,8 @@ package client
 
 import (
 	"errors"
+	"github.com/Kotodian/rbcli/naming"
 	"github.com/streadway/amqp"
-	"rbcli/naming"
 )
 
 type channel struct {

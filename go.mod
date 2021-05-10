@@ -1,4 +1,4 @@
-module rbcli
+module github.com/Kotodian/rbcli
 
 go 1.16
 
