@@ -122,7 +122,7 @@ func (c *Client) Publish(routingKey *naming.RoutingKey, msg []byte) error {
 
 	return c.conn.Publish(c.conn.exchange, routingKey, m)
 }
-func (c *Client) Subscribe(routingKey *naming.RoutingKey, handler func(ctx context.Context) error) error {
+func (c *Client) Subscribe(queue *naming.Queue, handler func(ctx context.Context) error) error {
 	if c.conn == nil {
 		return ErrConnNil
 	}
@@ -137,10 +137,11 @@ func (c *Client) Subscribe(routingKey *naming.RoutingKey, handler func(ctx conte
 		}
 	}
 	sret := &subscriber{
-		topic:  routingKey,
+		topic:  queue.RoutingKey(),
 		mayRun: true,
 		fn:     fn,
 		r:      c,
+		queue: queue,
 	}
 	go sret.resubscribe()
 	return nil
