@@ -148,7 +148,7 @@ func (c *conn) Consume(queue *naming.Queue) (*channel, <-chan amqp.Delivery, err
 	if err != nil {
 		return nil, nil, err
 	}
-	deliveries, err := consumeChannel.ConsumeQueue(queue, true)
+	deliveries, err := consumeChannel.ConsumeQueue(queue, false)
 	if err != nil {
 		return nil, nil, err
 	}
