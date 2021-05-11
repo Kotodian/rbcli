@@ -2,10 +2,12 @@ package client
 
 import (
 	"context"
-	"github.com/Kotodian/rbcli/naming"
-	"github.com/streadway/amqp"
 	"sync"
 	"time"
+
+	"github.com/Kotodian/rbcli/naming"
+	"github.com/streadway/amqp"
+	"k8s.io/klog/v2"
 )
 
 type Client struct {
@@ -98,6 +100,7 @@ func (s *subscriber) resubscribe() {
 			s.ch = ch
 			s.mtx.Unlock()
 		default:
+			klog.Errorln(err)
 			if reDelay > maxDelay {
 				reDelay = maxDelay
 			}
