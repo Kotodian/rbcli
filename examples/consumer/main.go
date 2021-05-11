@@ -20,7 +20,6 @@ func main() {
 	failOnError(err)
 	routingKey := naming.NewRoutingKey("ocpp", util.NewOcppTopic("ocpp01", "register"))
 	err = rbClient.Subscribe(naming.NewQueue("ocpp", routingKey), func(ctx context.Context) error {
-		fmt.Println("consume")
 		delivery := client.DeliveryFromContext(ctx)
 		fmt.Println(string(delivery.Body))
 		return nil
