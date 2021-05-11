@@ -18,7 +18,7 @@ func buildName(args ...string) (res string) {
 		if i == len(args)-1 {
 			res += arg
 		} else {
-			res += ":" + arg
+			res += arg + ":"
 		}
 	}
 	return
