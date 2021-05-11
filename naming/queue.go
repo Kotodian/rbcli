@@ -14,7 +14,7 @@ func NewQueue(appName string, routingKey *RoutingKey) *Queue {
 	}
 }
 func (u *Queue) Args() []string {
-	return []string{u.prefix, u.appName, u.routingKey.String(false)}
+	return []string{u.prefix,  u.routingKey.String(false)}
 }
 
 func (u *Queue) RoutingKey() *RoutingKey {

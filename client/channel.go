@@ -89,13 +89,13 @@ func (c *channel) BindQueue(queue *naming.Queue, exchange *naming.Exchange) erro
 }
 
 func (c *channel) ConsumeQueue(queue *naming.Queue, autoAck bool) (<-chan amqp.Delivery, error) {
-	delivery, err := c.channel.Consume(
+	msg, err := c.channel.Consume(
 		queue.String(true),
-		queue.RoutingKey().Consumer().String(),
+		queue.RoutingKey().Consumer().Id(),
 		autoAck,
 		false,
 		false,
 		false,
 		nil)
-	return delivery, amqpError("consume", err)
+	return msg, amqpError("consume", err)
 }

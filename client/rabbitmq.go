@@ -2,12 +2,10 @@ package client
 
 import (
 	"context"
-	"sync"
-	"time"
-
 	"github.com/Kotodian/rbcli/naming"
 	"github.com/streadway/amqp"
-	"k8s.io/klog/v2"
+	"sync"
+	"time"
 )
 
 type Client struct {
@@ -92,7 +90,7 @@ func (s *subscriber) resubscribe() {
 			continue
 		}
 		ch, sub, err := s.r.conn.Consume(s.queue)
-		s.r.mtx.Lock()
+		s.r.mtx.Unlock()
 		switch err {
 		case nil:
 			reDelay = minDelay
@@ -100,7 +98,6 @@ func (s *subscriber) resubscribe() {
 			s.ch = ch
 			s.mtx.Unlock()
 		default:
-			klog.Errorln(err)
 			if reDelay > maxDelay {
 				reDelay = maxDelay
 			}
@@ -108,7 +105,6 @@ func (s *subscriber) resubscribe() {
 			reDelay *= expFactor
 			continue
 		}
-
 		for d := range sub {
 			s.r.wg.Add(1)
 			s.fn(d)

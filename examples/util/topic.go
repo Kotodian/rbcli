@@ -12,3 +12,6 @@ func NewOcppTopic(host string, action string) *OcppTopic {
 func (r *OcppTopic) String() string {
 	return r.host + ":" + r.action
 }
+func (r *OcppTopic) Id() string {
+	return r.host
+}
